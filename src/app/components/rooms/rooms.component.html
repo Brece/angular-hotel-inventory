@@ -1,0 +1,36 @@
+<!-- Property binding -->
+<h1>Welcome to {{ hotelName }}</h1>
+
+<!-- Structural directives: *ngIf, *ngFor, *ngSwitch -->
+<!-- Attribute directives: ngClass, ngStyle -->
+{{ rooms.availableRooms ?? 'No rooms' }}
+
+<div *ngIf="rooms.availableRooms">
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Even/Odd</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Room Price</th>
+            <th>Amenities</th>
+            <th>Checkin Time</th>
+        </tr>
+        <tr *ngFor="let room of roomList; let e = even; let o = odd; let i = index">
+            <td>{{ i }}</td>
+            <td>{{ e ? 'Even' : 'Odd' }}</td>
+            <td>{{ room.roomNumber }}</td>
+            <td>{{ room.roomType }}</td>
+            <td>{{ room.price }}</td>
+            <td>{{ room.amenities }}</td>
+            <td>{{ room.checkinTime }}</td>
+        </tr>
+    </table>
+</div>
+
+<!-- Event binding -->
+<button type="button" (click)="toggle()">Toggle</button>
+<div [hidden]="hideRooms">
+    <h3>Number of Rooms:</h3>
+    <p [innerText]="numberOfRooms"></p>
+</div>
