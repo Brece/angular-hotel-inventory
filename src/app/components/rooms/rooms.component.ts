@@ -24,6 +24,7 @@ export class RoomsComponent implements OnInit {
       photos: '/rooms/room-1.jpg',
       checkinTime: new Date('11-Nov-2022'),
       checkoutTime: new Date('11-Dez-2022'),
+      rating: 4.6252,
     },
     {
       roomType: 'Normal Room',
@@ -33,6 +34,7 @@ export class RoomsComponent implements OnInit {
       photos: '/rooms/room-2.jpg',
       checkinTime: new Date('01-Sep-2022'),
       checkoutTime: new Date('25-Okt-2022'),
+      rating: 4.245,
     },
     {
       roomType: 'Limited Room',
@@ -42,6 +44,7 @@ export class RoomsComponent implements OnInit {
       photos: '/rooms/room-3.jpg',
       checkinTime: new Date('01-Jan-2022'),
       checkoutTime: new Date('30-Dez-2022'),
+      rating: 4.8,
     },
   ]
 
