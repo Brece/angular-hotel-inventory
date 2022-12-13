@@ -8,7 +8,7 @@ import { Room, RoomList } from './room';
 })
 export class RoomsComponent implements OnInit {
   hotelName = 'Hilton Hotel';
-  numberOfRooms = 25;
+  numberOfRooms = 350;
   hideRooms = true;
   rooms: Room = {
     totalRooms: 55,

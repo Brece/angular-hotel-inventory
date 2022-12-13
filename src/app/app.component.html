@@ -1,2 +1,11 @@
 <router-outlet></router-outlet>
-<app-rooms></app-rooms>
+
+<!-- Structural directive *ngSwitch -->
+<div [ngSwitch]="role">
+    <div *ngSwitchCase="'Admin'">
+        <app-rooms></app-rooms>
+    </div>
+    <div *ngSwitchDefault>
+        You are not authorized to view this page!
+    </div>
+</div>
