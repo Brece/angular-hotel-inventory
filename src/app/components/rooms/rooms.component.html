@@ -9,34 +9,22 @@
 
 <p>Rooms available: {{ rooms.availableRooms ?? 'No rooms' }}</p>
 
-<div *ngFor="let room of roomList | slice: 0:2">
-    <p>{{ room | json }}</p>
-</div>
+<!-- 
+    <div *ngFor="let room of roomList | slice: 0:2">
+        <p>{{ room | json }}</p>
+    </div>
+-->
+
+
+<!-- parent-child relationship: data flow(properties, events) -->
+<div *ngIf="selectedRoom">{{ selectedRoom | json }}</div>
 
 <div *ngIf="rooms.availableRooms">
-    <table class="table">
-        <tr>
-            <th>Index</th>
-            <th>Even/Odd</th>
-            <th>Room Number</th>
-            <th>Room Type</th>
-            <th>Room Price</th>
-            <th>Amenities</th>
-            <th>Checkin Time</th>
-            <th>Rating</th>
-        </tr>
-        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e = even; let o = odd; let i = index">
-            <!-- Pipes -->
-            <td>{{ i | percent }}</td>
-            <td>{{ e ? 'Even' : 'Odd' }}</td>
-            <td>{{ room.roomNumber }}</td>
-            <td>{{ room.roomType }}</td>
-            <td>{{ room.price | currency: 'EUR' }}</td>
-            <td>{{ room.amenities | titlecase }}</td>
-            <td>{{ room.checkinTime | date: 'dd/MM/yyyy' }}</td>
-            <td>{{ room.rating | number: '1.0-2' }}</td>
-        </tr>
-    </table>
+    <app-rooms-list
+        [roomList]="roomList"
+        (selectedRoom)="selectRoom($event)"
+    >
+    </app-rooms-list>
 </div>
 
 <div [hidden]="hideRooms">
