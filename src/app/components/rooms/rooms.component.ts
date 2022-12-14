@@ -4,7 +4,7 @@ import { Room, RoomList } from './room';
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.scss']
+  styleUrls: ['./rooms.component.scss'],
 })
 export class RoomsComponent implements OnInit {
   hotelName = 'Hilton Hotel';
@@ -59,7 +59,23 @@ export class RoomsComponent implements OnInit {
     this.hideRooms = !this.hideRooms;
   }
 
-  selectRoom(room: RoomList) {
+  selectRoom(room: RoomList): void {
     this.selectedRoom = room;
+  }
+
+  addRoom(): void {
+    const room: RoomList = {
+      roomType: 'Royal Room',
+      roomNumber: 4,
+      amenities: 'Air Condition, Free Wi-Fi, Kitchen, Bathroom',
+      price: 1499,
+      photos: '/rooms/room-1.jpg',
+      checkinTime: new Date('11-Nov-2022'),
+      checkoutTime: new Date('11-Dez-2022'),
+      rating: 4.866,
+    };
+
+    // return a new instance, current property is immutable !!!
+    this.roomList = [...this.roomList, room];
   }
 }

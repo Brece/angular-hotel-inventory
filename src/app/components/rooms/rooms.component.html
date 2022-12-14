@@ -19,11 +19,14 @@
 <!-- parent-child relationship: data flow(properties, events) -->
 <div *ngIf="selectedRoom">{{ selectedRoom | json }}</div>
 
+<div>
+    <button type="button" (click)="addRoom()">Add Room</button>
+</div>
+
 <div *ngIf="rooms.availableRooms">
     <app-rooms-list
         [roomList]="roomList"
-        (selectedRoom)="selectRoom($event)"
-    >
+        (selectedRoom)="selectRoom($event)">
     </app-rooms-list>
 </div>
 
