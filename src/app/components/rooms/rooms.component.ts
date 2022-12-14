@@ -17,6 +17,7 @@ export class RoomsComponent implements OnInit {
   };
   roomList: RoomList[] = [];
   selectedRoom!: RoomList;
+  title = 'Room List';
 
   constructor() { }
 
@@ -74,6 +75,9 @@ export class RoomsComponent implements OnInit {
       checkoutTime: new Date('11-Dez-2022'),
       rating: 4.866,
     };
+
+    // after list update all properties that changed (here: title and displayed roomList in child component) on an event are listed in ngOnChange object
+    this.title = 'Updated Room List';
 
     // return a new instance, current property is immutable !!!
     this.roomList = [...this.roomList, room];
