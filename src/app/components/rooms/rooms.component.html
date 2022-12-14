@@ -2,7 +2,7 @@
 <h1>Welcome to {{ hotelName }}</h1>
 
 <!-- Event binding -->
-<button type="button" (click)="toggle()">Toggle</button>
+<button type="button" (click)="toggle()" class="btn btn-primary">Toggle</button>
 
 <!-- Structural directives: *ngIf, *ngFor, *ngSwitch -->
 <!-- Attribute directives: ngClass, ngStyle -->
@@ -14,7 +14,7 @@
 </div>
 
 <div *ngIf="rooms.availableRooms">
-    <table>
+    <table class="table">
         <tr>
             <th>Index</th>
             <th>Even/Odd</th>

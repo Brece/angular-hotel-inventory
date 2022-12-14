@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import { setTheme } from 'ngx-bootstrap/utils';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-hotel-inventory';
   role = 'Admin';
+
+  constructor() {
+    // setTheme('bs5');
+  }
 }
