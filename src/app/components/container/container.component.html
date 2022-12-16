@@ -1,0 +1,8 @@
+<!--
+    Content Projection: ng-content is a placeholder for the content that is placed by the developer "inside the component's tag" in its parent (app-component.html) 
+
+    "select" references the component that we want to replace ng-content with; here we are creating several components in a sequence => it doesn't matter in which order the referenced components are placed in the parent component. The definitive order is specified here which will be applied for the matching tags
+-->
+<ng-content select="app-employee"></ng-content>
+<ng-content></ng-content>
+<ng-content select="app-rooms"></ng-content>
