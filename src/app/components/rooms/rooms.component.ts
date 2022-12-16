@@ -1,12 +1,15 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './room';
+
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
 })
-export class RoomsComponent implements OnInit, DoCheck {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+
   hotelName = 'Hilton Hotel';
   numberOfRooms = 350;
   hideRooms = true;
@@ -19,9 +22,20 @@ export class RoomsComponent implements OnInit, DoCheck {
   selectedRoom!: RoomList;
   title = 'Room List';
 
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+
+  // {static: false} by default and cannot be changed!
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
+
   constructor() { }
 
   ngOnInit(): void {
+    /** undefined when @ViewChild(component, {static: false}) which is the default value
+     * available AFTER the child is initialized => ngAfterViewInit
+     * you can set {static: true} if the child component doesn't have asyncronous code !!!
+    */
+    // console.log("Header:", this.headerComponent);
+
     this.roomList = [
       {
         roomType: 'Deluxe Room',
@@ -56,8 +70,22 @@ export class RoomsComponent implements OnInit, DoCheck {
     ];
   }
 
+  ngAfterViewInit(): void {
+    console.log("Header:", this.headerComponent);
+    console.log("HeaderChildren:", this.headerChildrenComponent);
+
+    this.headerComponent.title = "Rooms View";
+
+    this.headerChildrenComponent.last.title = 'Last Component Title';
+    // this.headerChildrenComponent.forEach(c => c.title = 'xxx');
+  }
+
+  ngAfterViewChecked(): void {
+    
+  }
+
   ngDoCheck(): void {
-    console.log('on changes called');
+    // console.log('doCheck called');
   }
 
   toggle(): void {
