@@ -2,6 +2,7 @@ import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList,
 import { Room, RoomList } from './room';
 
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -27,7 +28,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   // {static: false} by default and cannot be changed!
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
-  constructor() { }
+  /** Instanciate a service by passing it as an argument to the constructor with the appropriate identifier 
+   * 
+   * never declare/instanciate a service like this:
+   *    roomsService = new RoomsService();
+   * 
+   * get the data from the service in ngOnInit
+  */
+  constructor(private roomsService: RoomsService) { }
 
   ngOnInit(): void {
     /** undefined when @ViewChild(component, {static: false}) which is the default value
@@ -36,38 +44,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     */
     // console.log("Header:", this.headerComponent);
 
-    this.roomList = [
-      {
-        roomType: 'Deluxe Room',
-        roomNumber: 1,
-        amenities: 'Air Condition, Free Wi-Fi, Kitchen, Bathroom',
-        price: 999,
-        photos: '/rooms/room-1.jpg',
-        checkinTime: new Date('11-Nov-2022'),
-        checkoutTime: new Date('11-Dez-2022'),
-        rating: 4.6252,
-      },
-      {
-        roomType: 'Normal Room',
-        roomNumber: 2,
-        amenities: 'Air Condition, Free Wi-Fi, Kitchen, Bathroom',
-        price: 470,
-        photos: '/rooms/room-2.jpg',
-        checkinTime: new Date('01-Sep-2022'),
-        checkoutTime: new Date('25-Okt-2022'),
-        rating: 4.245,
-      },
-      {
-        roomType: 'Limited Room',
-        roomNumber: 3,
-        amenities: 'Air Condition, Free Wi-Fi, Kitchen, Bathroom',
-        price: 640,
-        photos: '/rooms/room-3.jpg',
-        checkinTime: new Date('01-Jan-2022'),
-        checkoutTime: new Date('30-Dez-2022'),
-        rating: 4.8,
-      },
-    ];
+    this.roomList = this.roomsService.getRooms();
   }
 
   ngAfterViewInit(): void {
