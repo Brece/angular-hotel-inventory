@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { RoomList } from '../room';
+import { environment } from 'src/environments/environment';
+import { APP_SERVICE_CONFIG } from 'src/app/services/AppConfig/appconfig.service';
+import { AppConfig } from 'src/app/services/AppConfig/appconfig.interface';
 
 @Injectable({
   /** 'root' means it gets registered in app.module.ts in 'providers' for us as a SINGLE global instance that can be used across the application
@@ -45,10 +48,16 @@ export class RoomsService {
     },
   ];
 
-  constructor() { }
+  /**
+   * @Inject as a value provider from a service (appconfig.service.ts) instead of accessing the value directly from the environment file 
+   */
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig) {
+    console.log('Rooms Service initialized...');
+    console.log('Environment:', this.config.apiEndpoint);
+    // console.log('Environment:', environment.apiEndpoint);
+  }
 
   getRooms(): RoomList[] {
-    console.log('Rooms Service initialized...');
     return this.roomList;
   }
 }
