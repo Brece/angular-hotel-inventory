@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Optional, ViewChild, ViewContainerRef } from '@angular/core';
 
 import { RoomsComponent } from './components/rooms/rooms.component';
+import { LoggerService } from './services/logger.service';
 // import { setTheme } from 'ngx-bootstrap/utils';
 
 @Component({
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit ,AfterViewInit {
   title = 'angular-hotel-inventory';
   role = 'Admin';
 
-  constructor() {
+  constructor(@Optional() private loggerService: LoggerService) {
     // setTheme('bs5');
   }
 
@@ -31,6 +32,10 @@ export class AppComponent implements OnInit ,AfterViewInit {
 
   ngOnInit(): void {
     this.wrapper.nativeElement.innerText = 'Hotel Hilton';
+
+    // "?" checks if loggerService is available, then executes the method
+    // in this case it isn't registered in root or app.module.ts under providers, so log method doesn't get exucuted
+    this.loggerService?.log('AppComponent.ngOnInit()')
   }
 
 }

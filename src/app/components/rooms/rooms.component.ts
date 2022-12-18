@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './room';
 
 import { HeaderComponent } from '../header/header.component';
@@ -34,8 +34,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
    *    roomsService = new RoomsService();
    * 
    * get the data from the service in ngOnInit
+   * 
+   * @SkipSelf identifier skips the check of the existence of the service; removes it from the resolution tree
+   *  usage: not necessary since Angular uses a "Bloom Filter" internally (which is alrealdy fast) to check if the service exists
   */
-  constructor(private roomsService: RoomsService) { }
+  constructor(@SkipSelf() private roomsService: RoomsService) { }
 
   ngOnInit(): void {
     /** undefined when @ViewChild(component, {static: false}) which is the default value

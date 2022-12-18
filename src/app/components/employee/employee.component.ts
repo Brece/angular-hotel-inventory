@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Self } from '@angular/core';
 import { RoomsService } from '../rooms/services/rooms.service';
 
 @Component({
@@ -12,7 +12,8 @@ export class EmployeeComponent implements OnInit {
 
   employeeName: string = 'John Doe';
   
-  constructor() { }
+  // with "self" resolution identifier the service should be available at this level, raise ExeptionError otherwise if it's not listed under @Component.providers
+  constructor(@Self() private roomsService: RoomsService) { }
 
   ngOnInit(): void {
   }
