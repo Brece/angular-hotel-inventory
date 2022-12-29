@@ -3,6 +3,7 @@ import { RoomList } from '../room';
 import { environment } from 'src/environments/environment';
 import { APP_SERVICE_CONFIG } from 'src/app/services/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/services/AppConfig/appconfig.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   /** 'root' means it gets registered in app.module.ts in 'providers' for us as a SINGLE global instance that can be used across the application
@@ -15,6 +16,8 @@ import { AppConfig } from 'src/app/services/AppConfig/appconfig.interface';
 export class RoomsService {
   // move component logic into a service
 
+  // hard coded database
+  /* 
   roomList: RoomList[] = [
     {
       roomType: 'Deluxe Room',
@@ -47,17 +50,28 @@ export class RoomsService {
       rating: 4.8,
     },
   ];
+  */
+
+  // database from backend server
+  roomList: RoomList[] = [];
 
   /**
    * @Inject as a value provider from a service (appconfig.service.ts) instead of accessing the value directly from the environment file 
    */
-  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig) {
-    console.log('Rooms Service initialized...');
-    console.log('Environment:', this.config.apiEndpoint);
-    // console.log('Environment:', environment.apiEndpoint);
+  constructor(
+    @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
+    private http: HttpClient
+    ) {
+      console.log('Rooms Service initialized...');
+      console.log('Environment:', this.config.apiEndpoint);
+      // console.log('Environment:', environment.apiEndpoint);
   }
 
-  getRooms(): RoomList[] {
-    return this.roomList;
+  getRooms() {
+    // get from hardcoded database
+    // return this.roomList;
+
+    // get from backend API (proxy.config.json sets up the API source); transform data object into "RoomList[]" type
+    return this.http.get<RoomList[]>('./api/rooms');
   }
 }

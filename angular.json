@@ -73,7 +73,7 @@
             },
             "development": {
               "browserTarget": "angular-hotel-inventory:build:development",
-              "proxyConfig": "src/proxy.config.json"
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

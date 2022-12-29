@@ -4,9 +4,24 @@ export interface Room {
     bookedRooms: number,
 }
 
+/**
+ * interface for hard coded database (roomNumber is type of 'number')
 export interface RoomList {
     roomType: string,
     roomNumber: number,
+    amenities: string,
+    price: number,
+    photos: string,
+    checkinTime: Date,
+    checkoutTime: Date,
+    rating: number,
+}
+ */
+
+// interface for backend API
+export interface RoomList {
+    roomType: string,
+    roomNumber: string,
     amenities: string,
     price: number,
     photos: string,
