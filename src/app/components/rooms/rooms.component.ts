@@ -3,6 +3,7 @@ import { Room, RoomList } from './room';
 
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
@@ -22,6 +23,13 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   roomList: RoomList[] = [];
   selectedRoom!: RoomList;
   title = 'Room List';
+  stream = new Observable<string>(observer => {
+    observer.next('user1');
+    observer.next('user2');
+    observer.next('user3');
+    observer.complete();
+    // observer.error('error');
+  });
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
@@ -49,6 +57,13 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
     // this.roomList = this.roomsService.getRooms();
     this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
+
+    // data stream
+    this.stream.subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.log('stream error:', error),
+      complete: () => console.log('stream complete')
+    });
   }
 
   ngAfterViewInit(): void {
