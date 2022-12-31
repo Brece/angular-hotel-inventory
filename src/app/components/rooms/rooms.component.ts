@@ -95,12 +95,12 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   addRoom(): void {
     const room: RoomList = {
       roomType: 'Royal Room',
-      roomNumber: '4',
+      roomNumber: '',
       amenities: 'Air Condition, Free Wi-Fi, Kitchen, Bathroom',
       price: 1499,
       photos: '/rooms/room-1.jpg',
       checkinTime: new Date('11-Nov-2022'),
-      checkoutTime: new Date('11-Dez-2022'),
+      checkoutTime: new Date('11-Dec-2022'),
       rating: 4.866,
     };
 
@@ -108,6 +108,28 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.title = 'Updated Room List';
 
     // return a new instance, current property is immutable !!!
-    this.roomList = [...this.roomList, room];
+    // this.roomList = [...this.roomList, room];
+
+    // adds room to the database through API and assign a roomNumber (see room.service.ts in angular-hotel-inventory-api)
+    this.roomsService.addRoom(room).subscribe(data => this.roomList = data);
+  }
+
+  editRoom(): void {
+    const room: RoomList = {
+      roomType: 'Royal Room',
+      roomNumber: '3',
+      amenities: 'Air Condition, Free Wi-Fi, Kitchen, Bathroom',
+      price: 1499,
+      photos: '/rooms/room-1.jpg',
+      checkinTime: new Date('11-Nov-2022'),
+      checkoutTime: new Date('11-Dec-2022'),
+      rating: 4.866,
+    };
+
+    this.roomsService.editRoom(room).subscribe(data => this.roomList = data);
+  }
+
+  deleteRoom(id: string): void {
+    this.roomsService.deleteRoom(id).subscribe(data => this.roomList = data);
   }
 }

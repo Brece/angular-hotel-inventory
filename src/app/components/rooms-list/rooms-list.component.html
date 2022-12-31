@@ -10,6 +10,7 @@
         <th>Checkin Time</th>
         <th>Rating</th>
         <th>Select Room</th>
+        <th>Delete Room</th>
     </tr>
     <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e = even; let o = odd; let i = index">
         <!-- Pipes -->
@@ -28,6 +29,15 @@
                 (click)="selectRoom(room)"
             >
                 Select Room
+            </button>
+        </td>
+        <td>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="deleteRoom(room.roomNumber)"
+            >
+                Delete Room
             </button>
         </td>
     </tr>

@@ -12,6 +12,7 @@ export class RoomsListComponent implements OnInit, OnDestroy {
   @Input() roomList: RoomList[] = [];
   @Input() title: string = '';
   @Output() selectedRoom = new EventEmitter<RoomList>();
+  @Output() deletedRoom = new EventEmitter<string>();
 
   constructor() { }
 
@@ -35,5 +36,9 @@ export class RoomsListComponent implements OnInit, OnDestroy {
 
   selectRoom(room: RoomList) {
     this.selectedRoom.emit(room);
+  }
+
+  deleteRoom(id: string) {
+    this.deletedRoom.emit(id);
   }
 }

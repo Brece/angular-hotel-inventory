@@ -74,4 +74,16 @@ export class RoomsService {
     // get from backend API (proxy.config.json sets up the API source); transform data object into "RoomList[]" type
     return this.http.get<RoomList[]>('./api/rooms');
   }
+
+  addRoom(room: RoomList) {
+    return this.http.post<RoomList[]>('api/rooms', room);
+  }
+
+  editRoom(room: RoomList) {
+    return this.http.put<RoomList[]>(`/api/rooms/${room.roomNumber}`, room);
+  }
+
+  deleteRoom(id: string) {
+    return this.http.delete<RoomList[]>(`/api/rooms/${id}`);
+  }
 }

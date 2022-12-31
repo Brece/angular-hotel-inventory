@@ -25,12 +25,15 @@
 
 <div>
     <button type="button" (click)="addRoom()">Add Room</button>
+    <br>
+    <button type="button" (click)="editRoom()">Edit Room</button>
 </div>
 
 <div *ngIf="!hideRooms">
     <app-rooms-list
         [roomList]="roomList"
         (selectedRoom)="selectRoom($event)"
+        (deletedRoom)="deleteRoom($event)"
         [title]="title">
     </app-rooms-list>
 </div>
