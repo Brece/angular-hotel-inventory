@@ -29,3 +29,12 @@ export interface RoomList {
     checkoutTime: Date,
     rating: number,
 }
+
+// interface for photos for 'Fake JSON API'
+export interface Photos {
+    albumId: number,
+    id: number,
+    title: string,
+    url: string,
+    thumbnailUrl: string,
+}

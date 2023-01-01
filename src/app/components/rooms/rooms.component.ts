@@ -4,6 +4,7 @@ import { Room, RoomList } from './room';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-rooms',
@@ -30,6 +31,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     observer.complete();
     // observer.error('error');
   });
+  totalBytes = 0;
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
@@ -63,6 +65,24 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       next: (data) => console.log(data),
       error: (error) => console.log('stream error:', error),
       complete: () => console.log('stream complete')
+    });
+
+    // Fake JSON API request; subscribe to multiple returned events
+    this.roomsService.getPhotos().subscribe(event => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Fake JSON API request has been made.');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Fake JSON API request success.');
+          break;
+        case HttpEventType.DownloadProgress:
+          this.totalBytes += event.loaded;
+          console.log('Total Bytes', this.totalBytes);
+          break;
+        case HttpEventType.Response:
+          console.log(event.body);
+      }
     });
   }
 

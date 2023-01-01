@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
-import { RoomList } from '../room';
+import { Photos, RoomList } from '../room';
 import { environment } from 'src/environments/environment';
 import { APP_SERVICE_CONFIG } from 'src/app/services/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/services/AppConfig/appconfig.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable({
   /** 'root' means it gets registered in app.module.ts in 'providers' for us as a SINGLE global instance that can be used across the application
@@ -85,5 +85,12 @@ export class RoomsService {
 
   deleteRoom(id: string) {
     return this.http.delete<RoomList[]>(`/api/rooms/${id}`);
+  }
+
+  getPhotos() {
+    const request = new HttpRequest('GET', `https://jsonplaceholder.typicode.com/photos`, {
+      reportProgress: true,
+    });
+    return this.http.request<Photos>(request);
   }
 }
