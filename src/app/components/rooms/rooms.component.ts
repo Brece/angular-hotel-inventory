@@ -58,7 +58,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     // console.log("Header:", this.headerComponent);
 
     // this.roomList = this.roomsService.getRooms();
-    this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
+    
+    // get stream data from RxJS shareReplay that caches the response and shares it instead of doing a http request for every component 
+    // this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
+    this.roomsService.getRooms$.subscribe(rooms => this.roomList = rooms);
 
     // data stream
     this.stream.subscribe({

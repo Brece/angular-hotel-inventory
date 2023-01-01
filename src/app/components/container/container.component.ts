@@ -7,7 +7,7 @@ import { RoomsService } from '../rooms/services/rooms.service';
   selector: 'app-container',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
-  providers: [RoomsService]
+  // providers: [RoomsService]
 })
 export class ContainerComponent implements OnInit, AfterContentInit {
 
@@ -18,7 +18,8 @@ export class ContainerComponent implements OnInit, AfterContentInit {
    * with @Host identifier/decorator all child components of this container are going to use this instance instead of the one on root level
    * 
    */
-  constructor(@Host() private roomsService: RoomsService) { }
+  // constructor(@Host() private roomsService: RoomsService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

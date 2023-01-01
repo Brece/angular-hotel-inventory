@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { APP_SERVICE_CONFIG } from 'src/app/services/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/services/AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   /** 'root' means it gets registered in app.module.ts in 'providers' for us as a SINGLE global instance that can be used across the application
@@ -54,6 +55,14 @@ export class RoomsService {
 
   // database from backend server
   roomList: RoomList[] = [];
+
+  /** ShareReplay RxJs Operators: http response saved to cache and shared through the app => less requests, more performant
+   * a stream can't be modified once subscribed; a stream can be modified inside a function known as "pipe"
+   * shareReplay(1): shares the last received record
+   * 
+   * $-notation at the end of a property name stands for a "stream"
+  */
+  getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(shareReplay(1));
 
   /**
    * @Inject as a value provider from a service (appconfig.service.ts) instead of accessing the value directly from the environment file 
