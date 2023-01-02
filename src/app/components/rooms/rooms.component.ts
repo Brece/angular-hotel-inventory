@@ -3,7 +3,7 @@ import { Room, RoomList } from './room';
 
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -32,6 +32,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     // observer.error('error');
   });
   totalBytes = 0;
+  subscription!: Subscription;
+
+  // how to automatically subscribe and unsubscribe a stream using async pipe (look in rooms.component.html)
+  rooms$ = this.roomsService.getRooms$;
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
@@ -61,7 +65,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     
     // get stream data from RxJS shareReplay that caches the response and shares it instead of doing a http request for every component 
     // this.roomsService.getRooms().subscribe(rooms => this.roomList = rooms);
-    this.roomsService.getRooms$.subscribe(rooms => this.roomList = rooms);
+
+    // manually subscribing to a stream (when not using "async pipe")
+    // this.subscription = this.roomsService.getRooms$.subscribe(rooms => this.roomList = rooms);
 
     // data stream
     this.stream.subscribe({
@@ -105,6 +111,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   ngDoCheck(): void {
     // console.log('doCheck called');
+  }
+
+  ngOnDestroy(): void {
+    // unsubscribe and free up memory resources manually
+    // not necessary when using async pipe to access the stream data
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   toggle(): void {
