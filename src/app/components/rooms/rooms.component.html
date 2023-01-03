@@ -10,7 +10,8 @@
 -->
 
 <h4>
-    {{ getError$ | async }}
+    <p>Stream Error: {{ getError$ | async }}</p>
+    <p>Rooms Count: {{ roomsCount$ | async }}</p>
 </h4>
 
 <!-- Event binding -->

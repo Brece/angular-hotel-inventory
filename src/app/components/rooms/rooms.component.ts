@@ -3,7 +3,7 @@ import { Room, RoomList } from './room';
 
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { catchError, Observable, of, Subject, Subscription } from 'rxjs';
+import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -46,6 +46,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       this.error$.next(err.message);
       return of([]);
     })
+  );
+
+  // map operator to modify stream data
+  roomsCount$ = this.roomsService.getRooms$.pipe(
+    map(rooms => rooms.length)
   );
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
