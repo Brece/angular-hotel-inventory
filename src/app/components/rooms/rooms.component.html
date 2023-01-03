@@ -9,6 +9,10 @@
     {{ rooms$ | async | json }}
 -->
 
+<h4>
+    {{ getError$ | async }}
+</h4>
+
 <!-- Event binding -->
 <button type="button" (click)="toggle()" class="btn btn-primary">Toggle</button>
 

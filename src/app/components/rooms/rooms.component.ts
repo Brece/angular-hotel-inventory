@@ -3,7 +3,7 @@ import { Room, RoomList } from './room';
 
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -33,9 +33,20 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   });
   totalBytes = 0;
   subscription!: Subscription;
+  // Subject is an observable and observer
+  error$ = new Subject<string>();
+  getError$ = this.error$.asObservable();
 
   // how to automatically subscribe and unsubscribe a stream using async pipe (look in rooms.component.html)
-  rooms$ = this.roomsService.getRooms$;
+  // errors that occurs in streams can be handled with "pipe" method; for demonstrating purposes the error handling is placed in the component, it should be done in the service file
+  // you can create an error by changing the api url to one that doesn't exist in "rooms.service.ts" for getRooms$
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError(err => {
+      // console.log("Rooms Service stream error:", err);
+      this.error$.next(err.message);
+      return of([]);
+    })
+  );
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
