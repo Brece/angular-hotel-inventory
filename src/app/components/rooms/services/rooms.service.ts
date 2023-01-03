@@ -3,7 +3,7 @@ import { Photos, RoomList } from '../room';
 import { environment } from 'src/environments/environment';
 import { APP_SERVICE_CONFIG } from 'src/app/services/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/services/AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { shareReplay } from 'rxjs';
 
 @Injectable({
@@ -80,8 +80,15 @@ export class RoomsService {
     // get from hardcoded database
     // return this.roomList;
 
+    // http interceptor; with "append" method you can add several header key-value pairs
+    const headers = new HttpHeaders({
+      'token': '135jk35hlk5o3j5'
+    });
+
     // get from backend API (proxy.config.json sets up the API source); transform data object into "RoomList[]" type
-    return this.http.get<RoomList[]>('./api/rooms');
+    return this.http.get<RoomList[]>('./api/rooms', {
+      headers: headers,
+    });
   }
 
   addRoom(room: RoomList) {
