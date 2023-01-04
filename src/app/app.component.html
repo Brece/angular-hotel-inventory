@@ -1,4 +1,9 @@
+<!-- Angular router: "href" would reload the page with another http request; "routerLink" treats it like a single page application -->
+<a [routerLink]="'employee'">Employee</a>
+<br>
+<a [routerLink]="'rooms'">Rooms</a>
 <router-outlet></router-outlet>
+
 
 <!-- Structural directive *ngSwitch -->
 <div [ngSwitch]="role">
