@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -11,6 +11,12 @@ import { ContainerComponent } from './components/container/container.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './services/AppConfig/appconfig.service';
 import { RequestInterceptor } from './interceptors/request.interceptor';
+import { InitService } from './services/Init/init.service';
+
+// APP_INITIALIZER
+function initFactory(initService: InitService) {
+  return () => initService.init();
+}
 
 @NgModule({
   declarations: [
@@ -34,6 +40,12 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initFactory,
+      deps: [InitService],
       multi: true,
     }
   ],

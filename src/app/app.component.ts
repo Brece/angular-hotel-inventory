@@ -5,6 +5,7 @@ import { LoggerService } from './services/Logger/logger.service';
 // import { setTheme } from 'ngx-bootstrap/utils';
 
 import { LocalStorageToken } from './localstorage.token';
+import { InitService } from './services/Init/init.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,12 @@ export class AppComponent implements OnInit ,AfterViewInit {
 
   constructor(
     @Optional() private loggerService: LoggerService,
-    @Inject(LocalStorageToken) private localStorage: Storage
+    @Inject(LocalStorageToken) private localStorage: Storage,
+    private initService: InitService
     ) {
     // setTheme('bs5');
+
+    console.log("InitService Config:", initService.config);
   }
 
   // type ElementRef because it's a normal HTML tag element; accessable in ngOnInit because of {static: true}
