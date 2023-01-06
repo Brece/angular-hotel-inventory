@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { RoomsBookingComponent } from './components/rooms-booking/rooms-booking.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 
 const routes: Routes = [
   { path: 'employee', component: EmployeeComponent },
   { path: 'rooms', component: RoomsComponent },
+  { path: 'rooms/:id', component: RoomsBookingComponent },
   { path: '', redirectTo: '/rooms', pathMatch: 'full' },
+  { path: '**', component: NotfoundComponent }
 ];
 
 @NgModule({

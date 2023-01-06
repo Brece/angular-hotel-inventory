@@ -20,6 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { RoomsBookingComponent } from './components/rooms-booking/rooms-booking.component';
 
 // APP_INITIALIZER
 function initFactory(initService: InitService) {
@@ -34,7 +36,9 @@ function initFactory(initService: InitService) {
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
-    NavigationComponent
+    NavigationComponent,
+    NotfoundComponent,
+    RoomsBookingComponent
   ],
   imports: [
     BrowserModule,
