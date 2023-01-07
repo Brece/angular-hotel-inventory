@@ -8,9 +8,9 @@ import { RoomsComponent } from './components/rooms/rooms.component';
 
 const routes: Routes = [
   { path: 'employee', component: EmployeeComponent },
-  { path: 'rooms', component: RoomsComponent },
   { path: 'rooms/add', component: RoomsAddComponent },
   { path: 'rooms/:id', component: RoomsBookingComponent },
+  { path: 'rooms', component: RoomsComponent },
   { path: '', redirectTo: '/rooms', pathMatch: 'full' },
   { path: '**', component: NotfoundComponent }
 ];
