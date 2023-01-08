@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { RoomList } from '../rooms/room';
 import { RoomsService } from '../rooms/services/rooms.service';
 
@@ -26,8 +27,12 @@ export class RoomsAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  AddRoom() {
-    this.roomsService.addRoom(this.room).subscribe(data => this.successMessage = 'Room Added Successfully');
+  AddRoom(roomsForm: NgForm) {
+    this.roomsService.addRoom(this.room).subscribe(data => {
+      this.successMessage = 'Room Added Successfully';
+      roomsForm.reset();
+      // with resetForm() method you can pass in a default data values after the reset
+    });
   }
 
 }
