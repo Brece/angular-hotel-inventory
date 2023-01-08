@@ -24,6 +24,9 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RoomsBookingComponent } from './components/rooms-booking/rooms-booking.component';
 import { RoomsAddComponent } from './components/rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { HoverDirective } from './directives/hover/hover.directive';
+import { EmailvalidatorDirective } from './directives/emailvalidator/emailvalidator.directive';
 
 // APP_INITIALIZER
 function initFactory(initService: InitService) {
@@ -41,7 +44,10 @@ function initFactory(initService: InitService) {
     NavigationComponent,
     NotfoundComponent,
     RoomsBookingComponent,
-    RoomsAddComponent
+    RoomsAddComponent,
+    LoginComponent,
+    HoverDirective,
+    EmailvalidatorDirective
   ],
   imports: [
     BrowserModule,
