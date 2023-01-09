@@ -4,9 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomsComponent } from './components/rooms/rooms.component';
-import { RoomsListComponent } from './components/rooms-list/rooms-list.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ContainerComponent } from './components/container/container.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './services/AppConfig/appconfig.service';
@@ -21,36 +18,40 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { RoomsBookingComponent } from './components/rooms-booking/rooms-booking.component';
-import { RoomsAddComponent } from './components/rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HoverDirective } from './directives/hover/hover.directive';
 import { EmailvalidatorDirective } from './directives/emailvalidator/emailvalidator.directive';
+import { RoomsModule } from './components/rooms/rooms.module';
+import { HeaderModule } from './components/header/header.module';
 
 // APP_INITIALIZER
 function initFactory(initService: InitService) {
   return () => initService.init();
 }
 
+/** components can only be declared in ONE module, modules can be imported as many times as needed
+ *
+ * IMPORTANT:
+ *  routes are executed in the order they are registered/imported here!
+ *  RoomsRoutingModule is imported in RoomsModule, so here it has to be imported BEFORE AppRoutingModule otherwise the 'wild card **' will be applied first before it gets to the room routes
+ * 
+ * => register 'feature modules' with their own routing BEFORE AppRoutingModule
+*/ 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomsComponent,
-    RoomsListComponent,
-    HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
     NavigationComponent,
     NotfoundComponent,
-    RoomsBookingComponent,
-    RoomsAddComponent,
     LoginComponent,
     HoverDirective,
     EmailvalidatorDirective
   ],
   imports: [
     BrowserModule,
+    RoomsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -60,7 +61,8 @@ function initFactory(initService: InitService) {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    HeaderModule
   ],
   providers: [
     {
