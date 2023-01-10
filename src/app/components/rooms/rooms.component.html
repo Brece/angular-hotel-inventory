@@ -35,7 +35,7 @@
 <div *ngIf="selectedRoom">{{ selectedRoom | json }}</div>
 
 <div>
-    <button type="button" (click)="addRoom()">Add Room</button>
+    <button type="button" routerLink="add">Add Room</button>
     <br>
     <button type="button" (click)="editRoom()">Edit Room</button>
 </div>
@@ -54,3 +54,6 @@
     <h3>Number of rooms in total:</h3>
     <p [ngStyle]="{ color: rooms.availableRooms ? 'green' : 'red' }" [innerText]="numberOfRooms"></p>
 </div>
+
+<!-- outlet for children routes of rooms-routing.module.ts -->
+<router-outlet></router-outlet>
