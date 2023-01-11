@@ -6,7 +6,8 @@ import { RoomsComponent } from './rooms.component';
 
 const routes: Routes = [
   { 
-    path: 'rooms',
+    // path is blank since we are lazy-loading rooms component and its children, the actual path is defined in app-routing.module.ts
+    path: '',
     component: RoomsComponent,
     children: [
       { path: 'add', component: RoomsAddComponent },

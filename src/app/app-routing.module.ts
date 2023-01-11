@@ -7,6 +7,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 const routes: Routes = [
   { path: 'employee', component: EmployeeComponent },
   { path: 'login', component: LoginComponent },
+  // lazy-loading rooms component and its children
+  { path: 'rooms', loadChildren: () => import('./components/rooms/rooms.module').then(m => m.RoomsModule) },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: NotfoundComponent }
 ];

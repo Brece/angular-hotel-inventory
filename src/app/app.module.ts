@@ -22,8 +22,10 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HoverDirective } from './directives/hover/hover.directive';
 import { EmailvalidatorDirective } from './directives/emailvalidator/emailvalidator.directive';
-import { RoomsModule } from './components/rooms/rooms.module';
 import { HeaderModule } from './components/header/header.module';
+
+// lazy-loaded components should be isolated
+// import { RoomsModule } from './components/rooms/rooms.module';
 
 // APP_INITIALIZER
 function initFactory(initService: InitService) {
@@ -51,7 +53,7 @@ function initFactory(initService: InitService) {
   ],
   imports: [
     BrowserModule,
-    RoomsModule,
+    // RoomsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
