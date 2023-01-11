@@ -9,6 +9,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // lazy-loading rooms component and its children
   { path: 'rooms', loadChildren: () => import('./components/rooms/rooms.module').then(m => m.RoomsModule) },
+  // configure lazy-loading using CLI: "ng generate module components/booking --route=booking --routing --module=app"
+  { path: 'booking', loadChildren: () => import('./components/booking/booking.module').then(m => m.BookingModule) },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: NotfoundComponent }
 ];
