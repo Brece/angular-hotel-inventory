@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { ConfigService } from 'src/app/services/Config/config.service';
 
 @Component({
   selector: 'app-rooms',
@@ -68,7 +69,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
    * @SkipSelf identifier skips the check of the existence of the service; removes it from the resolution tree
    *  usage: not necessary since Angular uses a "Bloom Filter" internally (which is alrealdy fast) to check if the service exists
   */
-  constructor(@SkipSelf() private roomsService: RoomsService) { }
+  constructor(
+    @SkipSelf() private roomsService: RoomsService,
+    private configService: ConfigService
+    ) { }
 
   ngOnInit(): void {
     /** undefined when @ViewChild(component, {static: false}) which is the default value

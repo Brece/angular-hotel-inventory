@@ -23,6 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HoverDirective } from './directives/hover/hover.directive';
 import { EmailvalidatorDirective } from './directives/emailvalidator/emailvalidator.directive';
 import { HeaderModule } from './components/header/header.module';
+import { RouteConfigToken } from './services/Config/routeConfig.service';
 
 // lazy-loaded components should be isolated
 // import { RoomsModule } from './components/rooms/rooms.module';
@@ -81,6 +82,10 @@ function initFactory(initService: InitService) {
       useFactory: initFactory,
       deps: [InitService],
       multi: true,
+    },
+    {
+      provide: RouteConfigToken,
+      useValue: { title: 'Home' }
     }
   ],
   bootstrap: [AppComponent]

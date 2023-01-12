@@ -6,6 +6,7 @@ import { LoggerService } from './services/Logger/logger.service';
 
 import { LocalStorageToken } from './localstorage.token';
 import { InitService } from './services/Init/init.service';
+import { ConfigService } from './services/Config/config.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit ,AfterViewInit {
   constructor(
     @Optional() private loggerService: LoggerService,
     @Inject(LocalStorageToken) private localStorage: Storage,
-    private initService: InitService
+    private initService: InitService,
+    private configService: ConfigService
     ) {
     // setTheme('bs5');
 
