@@ -7,6 +7,8 @@ import { LoggerService } from './services/Logger/logger.service';
 import { LocalStorageToken } from './localstorage.token';
 import { InitService } from './services/Init/init.service';
 import { ConfigService } from './services/Config/config.service';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit ,AfterViewInit {
     @Optional() private loggerService: LoggerService,
     @Inject(LocalStorageToken) private localStorage: Storage,
     private initService: InitService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private router: Router
     ) {
     // setTheme('bs5');
 
@@ -49,6 +52,22 @@ export class AppComponent implements OnInit ,AfterViewInit {
     this.loggerService?.log('AppComponent.ngOnInit()')
 
     this.localStorage.setItem('name', 'Hilton Hotel');
+
+    // route guards
+    /**
+     * 
+    this.router.events.subscribe(event => {
+        console.log('Route Event: ', event);
+      }
+    )
+    */
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationStart))
+      .subscribe(event => console.log('NavigationStart: ', event));
+    
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => console.log('NavigationEnd: ', event));
   }
 
 }
